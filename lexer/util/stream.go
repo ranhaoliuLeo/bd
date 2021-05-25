@@ -23,7 +23,7 @@ func NewStream(r io.Reader, endToken string) *Stream {
 		scanner: scanner,
 		queueCache: list.New(),
 		endToken: endToken,
-		isEnd: false
+		isEnd: false,
 	}
 }
 
@@ -64,7 +64,7 @@ func (this *Stream) HasNext() bool {
 	return false
 }
 
-// 主要是读取，不会消耗。。
+// 主要是读取，不会消耗Cache
 // 还能有优化空间
 func (this *Stream) Peek() string {
 	if this.queueCache.Len() != 0 {
@@ -81,5 +81,5 @@ func (this *Stream) Peek() string {
 }
 
 func (this *Stream) PutBack(token string) {
-	s.queueCache.PushFront(token)
+	this.queueCache.PushFront(token)
 }
