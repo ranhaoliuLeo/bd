@@ -27,7 +27,7 @@ func NewLexer(r io.Reader, endToken string) *Lexer {
 
 
 // 文件传入数据
-func FileLexer(relatePath string) *Lexer {
+func FileLexer(relatePath string) []*Token {
 	absPath, err := filepath.Abs(relatePath)
 	if err != nil {
 		panic(err)
@@ -38,7 +38,7 @@ func FileLexer(relatePath string) *Lexer {
 	}
 	defer f.Close()
 
-	return NewLexer(f, EndToken)
+	return NewLexer(f, EndToken).Analyse()
 }
 
 // 从字面量数据传入(test)
