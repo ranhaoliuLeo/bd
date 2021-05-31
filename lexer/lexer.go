@@ -326,10 +326,116 @@ func (this *Lexer) MakeOp() *Token {
 			}
 		case 1:
 			switch lookahead {
-			case condition:
-				
+			case "+":
+				return NewToken(OPERATOR, "++")
+			case "=":
+				return NewToken(OPERATOR, "+=")
+			default: 
+				this.PutBack(lookahead)
+				return NewToken(OPERATOR, "+")
+			}
+		case 2:
+			switch lookahead {
+			case "-":
+				return NewToken(OPERATOR, "--")
+			case "=":
+				return NewToken(OPERATOR, "-=")
+			default:
+				this.PutBack(lookahead)
+				return NewToken(OPERATOR, "-")
+			}
+		case 3: 
+			switch lookahead {
+			case "=":
+				return NewToken(OPERATOR, "*=")
+			default:
+				this.PutBack(lookahead)
+				return NewToken(OPERATOR, "=")
+			}
+		case 4:
+			switch lookahead {
+			case "=":
+				return NewToken(OPERATOR, "/=")
+			default:
+				this.PutBack(lookahead)
+				return NewToken(OPERATOR, "/")
+			}
+		case 5:
+			switch lookahead {
+			case "=":
+				return NewToken(OPERATOR, ">=")
+			case ">":
+				return NewToken(OPERATOR, ">>")
+			default:
+				this.PutBack(lookahead)
+				return NewToken(OPERATOR, ">")
+			}
+		case 6:
+			switch lookahead {
+			case "=":
+				return NewToken(OPERATOR, "<=")
+			case "<":
+				return NewToken(OPERATOR, "<<")
+			default:
+				this.PutBack(lookahead)
+				return NewToken(OPERATOR, "<")
+			}
+		case 7:
+			switch lookahead {
+			case "=":
+				return NewToken(OPERATOR, "==")
+			default:
+				this.PutBack(lookahead)
+				return NewToken(OPERATOR, "=")
+			}
+		case 8:
+			switch lookahead {
+			case "=":
+				return NewToken(OPERATOR, "!=")
+			default:
+				this.PutBack(lookahead)
+				return NewToken(OPERATOR, "=")
+			}
+		case 9:
+			switch lookahead {
+			case "&":
+				return NewToken(OPERATOR, "&&")
+			case "=":
+				return NewToken(OPERATOR, "&=")
+			default:
+				this.PutBack(lookahead)
+				return NewToken(OPERATOR, "&")
+			}
+		case 10:
+			switch lookahead {
+			case "|":
+				return NewToken(OPERATOR, "||")
+			case "=":
+				return NewToken(OPERATOR, "|=")
+			default:
+				this.PutBack(lookahead)
+				return NewToken(OPERATOR, "|")
+			}
+		case 11:
+			switch lookahead {
+			case "^":
+				return NewToken(OPERATOR, "^^")
+			case "=":
+				return NewToken(OPERATOR, "^=")
+			default:
+				this.PutBack(lookahead)
+				return NewToken(OPERATOR, "^")
+			}
+		case 12:
+			switch lookahead {
+			case "=":
+				return NewToken(OPERATOR, "%=")
+			default:
+				this.PutBack(lookahead)
+				return NewToken(OPERATOR, "%")
 			}
 		}
 	}
+	panic("error with parse token")
 } 
 
